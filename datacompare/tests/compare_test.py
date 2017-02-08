@@ -23,3 +23,8 @@ def test_compare_datasets():
     df_result = cp.compare_datasets(df1, df2, df1_keys, df2_keys,
                                     df1_columns_to_compare,
                                     df2_columns_to_compare)
+
+    assert len(df_result) == 5
+    assert df_result['equals'].where(df_result['equals']).count() == 1
+    assert df_result['only_in_df1'].where(df_result['only_in_df1']).count() == 1
+    assert df_result['only_in_df2'].where(df_result['only_in_df2']).count() == 1
