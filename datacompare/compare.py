@@ -6,10 +6,6 @@ SUFFIX_DF1 = '_df1'
 SUFFIX_DF2 = '_df2'
 
 
-def format_columns_to_compare(columns, suffix):
-    return list(column + suffix for column in columns)
-
-
 def equals_condition(df1_columns_to_compare, df2_columns_to_compare):
     condition = []
     for col_x, col_y in zip(df1_columns_to_compare, df2_columns_to_compare):
@@ -34,7 +30,7 @@ def compare_datasets(df1, df2, df1_keys, df2_keys,
         df2_columns_to_compare = list(column for column in df2.columns.difference(df2_keys))
 
     for column in df1_columns_to_compare:
-        if df2_columns_to_compare[df1_columns_to_compare.index(column)]:
+        if column in df2_columns_to_compare:
             df1_columns_to_compare[df1_columns_to_compare.index(column)] = column + SUFFIX_DF1
             df2_columns_to_compare[df2_columns_to_compare.index(column)] = column + SUFFIX_DF2
 

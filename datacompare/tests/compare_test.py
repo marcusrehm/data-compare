@@ -34,14 +34,16 @@ def test_compare_datasets_with_different_column_names():
     df2 = pd.DataFrame({'Z': ['A0', 'A1', 'A6', 'A7'],
                         'N': ['B0', 'B5', 'B6', 'B7'],
                         'C': ['C0', 'C5', 'C2', 'C7'],
-                        'D': ['D0', 'D5', 'D2', 'D7']})
+                        'J': ['D0', 'D5', 'D2', 'D7']})
 
     df1_keys = ['A']
     df2_keys = ['Z']
-    df1_columns_to_compare = ['B']
-    df2_columns_to_compare = ['Z']
+    df1_columns_to_compare = ['B','D']
+    df2_columns_to_compare = ['N','J']
 
-    df_result = cp.compare_datasets(df1, df2, df1_keys, df2_keys)
+    df_result = cp.compare_datasets(df1, df2, df1_keys, df2_keys,
+                                    df1_columns_to_compare,
+                                    df2_columns_to_compare)
     print df_result.head()
     assert len(df_result) == 5
     assert df_result['result'].where(df_result['result'] == 'equals').count() == 1
