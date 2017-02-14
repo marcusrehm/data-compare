@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import numpy as np
-from datacompare import compare as cp
+import datacompare as cp
 
 
 def test_compare_datasets_with_same_column_names():
@@ -38,8 +38,8 @@ def test_compare_datasets_with_different_column_names():
 
     df1_keys = ['A']
     df2_keys = ['Z']
-    df1_columns_to_compare = ['B','D']
-    df2_columns_to_compare = ['N','J']
+    df1_columns_to_compare = ['B', 'D']
+    df2_columns_to_compare = ['N', 'J']
 
     df_result = cp.compare_datasets(df1, df2, df1_keys, df2_keys,
                                     df1_columns_to_compare,
@@ -49,35 +49,3 @@ def test_compare_datasets_with_different_column_names():
     assert df_result['result'].where(df_result['result'] == 'equals').count() == 1
     assert df_result['result'].where(df_result['result'] == 'left_only').count() == 1
     assert df_result['result'].where(df_result['result'] == 'right_only').count() == 1
-
-
-# def test_large_dataset():
-#     df1 = pd.read_csv('..\siconv_convenio.csv', sep=';', decimal=',')
-#     df1_keys = ['NR_CONVENIO']
-#     df2_keys = ['NR_CONVENIO']
-#     df1_columns_to_compare = ['SIT_CONVENIO']
-#     df2_columns_to_compare = ['SIT_CONVENIO']
-#     df_result = cp.compare_datasets(df1, df1,
-#                                     df1_keys, df2_keys,
-#                                     df1_columns_to_compare,
-#                                     df2_columns_to_compare)
-#     assert len(df1) == len(df_result)
-#     # assert df_result['result'].where(df_result['result'] == 'equals').count() == 208621
-#     # assert df_result['result'].where(df_result['result'] == 'left_only').count() == 208621
-#     # assert df_result['result'].where(df_result['result'] == 'right_only').count() == 208621
-#
-# def test_large_dataset2():
-#     #https://www.kaggle.com/orgesleka/used-cars-database
-#     df1 = pd.read_csv('..\\autos.csv')
-#     df1_keys = ['name', 'postalCode']
-#     df2_keys = ['name', 'postalCode']
-#     df1_columns_to_compare = ['price']
-#     df2_columns_to_compare = ['price']
-#     df_result = cp.compare_datasets(df1, df1,
-#                                     df1_keys, df2_keys,
-#                                     df1_columns_to_compare,
-#                                     df2_columns_to_compare)
-#     assert len(df1) == len(df_result)
-#     # assert df_result['result'].where(df_result['result'] == 'equals').count() == 208621
-#     # assert df_result['result'].where(df_result['result'] == 'left_only').count() == 208621
-#     # assert df_result['result'].where(df_result['result'] == 'right_only').count() == 208621
