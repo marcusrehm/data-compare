@@ -44,7 +44,6 @@ def test_compare_datasets_with_different_column_names():
     df_result = cp.compare_datasets(df1, df2, df1_keys, df2_keys,
                                     df1_columns_to_compare,
                                     df2_columns_to_compare)
-    print df_result.head()
     assert len(df_result) == 5
     assert df_result['result'].where(df_result['result'] == 'equals').count() == 1
     assert df_result['result'].where(df_result['result'] == 'left_only').count() == 1
